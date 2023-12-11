@@ -2,15 +2,15 @@
 <testng-results ignored="0" total="3" passed="0" failed="3" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-12-09T18:37:52 CET" name="Default suite" finished-at="2023-12-09T18:38:04 CET" duration-ms="12103">
+  <suite started-at="2023-12-10T12:53:29 CET" name="Default suite" finished-at="2023-12-10T12:53:39 CET" duration-ms="10496">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2023-12-09T18:37:52 CET" name="Default test" finished-at="2023-12-09T18:38:04 CET" duration-ms="12103">
-      <class name="porDefecto.changeProductsTest">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" started-at="2023-12-09T18:37:52 CET" name="setUpClass" finished-at="2023-12-09T18:37:52 CET" duration-ms="138" status="PASS">
+    <test started-at="2023-12-10T12:53:29 CET" name="Default test" finished-at="2023-12-10T12:53:39 CET" duration-ms="10496">
+      <class name="porDefecto.RunCardMarketTest">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" started-at="2023-12-10T12:53:29 CET" name="setUpClass" finished-at="2023-12-10T12:53:29 CET" duration-ms="136" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -21,41 +21,41 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" started-at="2023-12-09T18:37:52 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-09T18:37:58 CET" duration-ms="6046" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" started-at="2023-12-10T12:53:29 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-10T12:53:32 CET" duration-ms="3445" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Filter Language Card"]]>
+                <![CDATA["Change Card Game"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["FilterLanguage"]]>
+                <![CDATA["ChangeGame"]]>
               </value>
             </param>
           </params>
           <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":"*[name='language[1]']"}
+              <![CDATA[no such element: Unable to locate element: {"method":"partial link text","selector":"Pokémon"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [4f62df691c51d18e2f934517a3cd2754, findElement {using=name, value=language[1]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58600}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58600/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 4f62df691c51d18e2f934517a3cd2754]]>
+Command: [e0ac9e0da82a60335db21a896491afd7, findElement {using=partial link text, value=Pokémon}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58405}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58405/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e0ac9e0da82a60335db21a896491afd7]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"*[name='language[1]']"}
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"partial link text","selector":"Pokémon"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [4f62df691c51d18e2f934517a3cd2754, findElement {using=name, value=language[1]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58600}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58600/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 4f62df691c51d18e2f934517a3cd2754
+Command: [e0ac9e0da82a60335db21a896491afd7, findElement {using=partial link text, value=Pokémon}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58405}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58405/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e0ac9e0da82a60335db21a896491afd7
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -72,49 +72,49 @@ at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(Elemen
 at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:364)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:358)
-at steps.CardMarketSteps.CardLanguageChecked(CardMarketSteps.java:196)
-at ✽.the language[1] appears checked(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/LanguageFilter.feature:10)
+at steps.CardMarketSteps.NewIndexAppears(CardMarketSteps.java:58)
+at ✽.the Pokémon shop appears(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/cardMarket.feature:8)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" started-at="2023-12-09T18:37:58 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-09T18:38:01 CET" duration-ms="3339" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" started-at="2023-12-10T12:53:32 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-10T12:53:33 CET" duration-ms="1078" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Filter Language Card"]]>
+                <![CDATA["Change Card Game"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["FilterLanguage"]]>
+                <![CDATA["ChangeGame"]]>
               </value>
             </param>
           </params>
           <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":".fonticon\-filter"}
+              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":".nav\-link"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [86597c5aaff4f5f7c44a5750b5c653df, findElement {using=class name, value=fonticon-filter}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58643}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58643/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 86597c5aaff4f5f7c44a5750b5c653df]]>
+Command: [f9bb792e5b84b3f056f94c5e5ec690d3, findElement {using=class name, value=nav-link}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58473}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58473/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f9bb792e5b84b3f056f94c5e5ec690d3]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":".fonticon\-filter"}
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":".nav\-link"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [86597c5aaff4f5f7c44a5750b5c653df, findElement {using=class name, value=fonticon-filter}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58643}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58643/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 86597c5aaff4f5f7c44a5750b5c653df
+Command: [f9bb792e5b84b3f056f94c5e5ec690d3, findElement {using=class name, value=nav-link}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58473}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58473/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f9bb792e5b84b3f056f94c5e5ec690d3
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -131,49 +131,49 @@ at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(Elemen
 at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:66)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:364)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:358)
-at steps.CardMarketSteps.UserClicksSidebarFilter(CardMarketSteps.java:165)
-at ✽.the user clicks sidebarFilter(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/LanguageFilter.feature:6)
+at steps.CardMarketSteps.UserClicksGameSelector(CardMarketSteps.java:47)
+at ✽.the user clicks the game selector(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/cardMarket.feature:6)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" started-at="2023-12-09T18:38:01 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-09T18:38:04 CET" duration-ms="2545" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" started-at="2023-12-10T12:53:33 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-12-10T12:53:39 CET" duration-ms="5800" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Filter Language Card"]]>
+                <![CDATA["Change Card Game"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["FilterLanguage"]]>
+                <![CDATA["ChangeGame"]]>
               </value>
             </param>
           </params>
           <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":".fonticon\-filter"}
+              <![CDATA[no such element: Unable to locate element: {"method":"partial link text","selector":"Digimon"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9a33eac6a0b088ad60641377bd44cab4, findElement {using=class name, value=fonticon-filter}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58689}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58689/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9a33eac6a0b088ad60641377bd44cab4]]>
+Command: [7db35d6509628dc02e09231697eb3197, findElement {using=partial link text, value=Digimon}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58506}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58506/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7db35d6509628dc02e09231697eb3197]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":".fonticon\-filter"}
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"partial link text","selector":"Digimon"}
   (Session info: chrome=120.0.6099.71)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.15.0', revision: '1d14b5521b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.9'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9a33eac6a0b088ad60641377bd44cab4, findElement {using=class name, value=fonticon-filter}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58689}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58689/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9a33eac6a0b088ad60641377bd44cab4
+Command: [7db35d6509628dc02e09231697eb3197, findElement {using=partial link text, value=Digimon}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 120.0.6099.71, chrome: {chromedriverVersion: 120.0.6099.71 (9729082fe617..., userDataDir: C:\Users\oriol\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58506}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58506/devtoo..., se:cdpVersion: 120.0.6099.71, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7db35d6509628dc02e09231697eb3197
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -187,22 +187,22 @@ at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(Driver
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:607)
 at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:66)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:364)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:358)
-at steps.CardMarketSteps.UserClicksSidebarFilter(CardMarketSteps.java:165)
-at ✽.the user clicks sidebarFilter(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/LanguageFilter.feature:6)
+at steps.CardMarketSteps.NewIndexAppears(CardMarketSteps.java:58)
+at ✽.the Digimon shop appears(file:///C:/Users/oriol/Desktop/UNI/TQS/TQS-Web-Test/src/test/java/features/cardMarket.feature:8)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:porDefecto.changeProductsTest@2034b64c]" started-at="2023-12-09T18:38:04 CET" name="tearDownClass" finished-at="2023-12-09T18:38:04 CET" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:porDefecto.RunCardMarketTest@2034b64c]" started-at="2023-12-10T12:53:39 CET" name="tearDownClass" finished-at="2023-12-10T12:53:39 CET" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
-      </class> <!-- porDefecto.changeProductsTest -->
+      </class> <!-- porDefecto.RunCardMarketTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

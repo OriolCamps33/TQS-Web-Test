@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="porDefecto.changeProductsTest">
+      <class name="porDefecto.RunCardMarketTest">
         <methods>
           <include name="setUpClass"/>
           <include name="runScenario" invocation-numbers="0 1 2"/>
           <include name="tearDownClass"/>
         </methods>
-      </class> <!-- porDefecto.changeProductsTest -->
+      </class> <!-- porDefecto.RunCardMarketTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

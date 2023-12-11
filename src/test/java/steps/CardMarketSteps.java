@@ -49,14 +49,13 @@ public class CardMarketSteps {
 	
 	@When("^the user clicks (.*) chosen game") 
 	public void UserClicksGameChosen(String game){
-		WebElement element = driver.findElement(By.partialLinkText(game));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
+		WebElement element = driver.findElement(By.xpath("//a[contains(@title, '" + game + "')]"));
+		element.click();
 	}
 	
 	@Then("^the (.*) shop appears")
 	public void NewIndexAppears(String title) {
-		String titulo = driver.findElement(By.className("nav-link")).getText();
+		String titulo = driver.findElement(By.partialLinkText(title)).getText();
 		Assert.assertTrue(titulo.contains(title));
 		driver.quit();
 	}
@@ -193,7 +192,7 @@ public class CardMarketSteps {
 	
 	@Then("^the (.*) appears checked")
 	public void CardLanguageChecked(String language) {
-		WebElement element = driver.findElement(By.name(language));
+		WebElement element = driver.findElement(By.name("language[5]"));
 		Assert.assertEquals(element.getAttribute("checked"), "true");
 		driver.quit();
 	}
