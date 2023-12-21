@@ -8,6 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,28 +20,33 @@ import io.cucumber.java.en.When;
 
 public class CardMarketSteps {
 
-	WebDriver driver;
+	static WebDriver driver;
 	
 	//Funcion comprueba pagina de inicio, todas las features la usan
 	
+	@BeforeAll
+	public static void before_or_after_all()
+	{
+		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@AfterAll
+	public static void after_all() {
+		driver.quit();
+	}
+	
+	@Given("the user is in the page onePiece")
+	public void UserInIndexPageOnePiece() 
+	{
+		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
+	}
 	@Given("the user is in the index page")
 	public void UserInIndexPage() 
 	{
-		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
-		driver = new ChromeDriver();
 		driver.navigate().to("https://www.cardmarket.com/es/Magic");
 		
 	}
-	
-	@Given("the user is in the index page onePiece")
-	public void UserInIndexPageOnePiece() 
-	{
-		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
-		
-	}
-	
 	
 	//------------------------------------------------------------------------------------------------------------
 	//funciones feature change game
@@ -57,7 +67,6 @@ public class CardMarketSteps {
 	public void NewIndexAppears(String title) {
 		String titulo = driver.findElement(By.partialLinkText(title)).getText();
 		Assert.assertTrue(titulo.contains(title));
-		driver.quit();
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
@@ -80,7 +89,6 @@ public class CardMarketSteps {
 	public void NewProductTitle(String type) {
 		String titulo = driver.findElement(By.className("H1_PageTitle")).getText();
 		Assert.assertTrue(titulo.contains(type));
-		driver.quit();
 	}
 	
 	
@@ -107,6 +115,7 @@ public class CardMarketSteps {
 	public void IndexPageChanges() {
 		String titulo = driver.findElement(By.id("taskbar")).getText();
 		Assert.assertTrue(titulo.contains("Tareas"));
+		
 	}
 	
 	
@@ -142,7 +151,6 @@ public class CardMarketSteps {
 	public void CardDescriptionAppears(String card) {
 		String titulo = driver.findElement(By.className("page-title-container")).getText();
 		Assert.assertTrue(titulo.contains(card));
-		driver.quit();
 	}
 	
 	
@@ -192,9 +200,9 @@ public class CardMarketSteps {
 	
 	@Then("^the (.*) appears checked")
 	public void CardLanguageChecked(String language) {
-		WebElement element = driver.findElement(By.name("language[5]"));
+		WebElement element = driver.findElement(By.name(language));
 		Assert.assertEquals(element.getAttribute("checked"), "true");
-		driver.quit();
+		driver.close();
 	}
 	
 }

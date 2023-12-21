@@ -2,7 +2,7 @@
 Feature: SearchCard
 Scenario Outline: User Search Card
 
-Given the user is in the index page onePiece
+Given the user is in the page onePiece
 When the user writes <name> of the card
 And the user clicks search button
 And the user clicks <card> he wants
