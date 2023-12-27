@@ -27,12 +27,14 @@ class initSesionTest extends AbstractTestNGCucumberTests{
 @CucumberOptions(features="src/test/java/features/searchCard.feature", glue="steps")
 class searchCardTest extends AbstractTestNGCucumberTests{
 }
-*/
 
 //filtrar por idioma
 @CucumberOptions(features="src/test/java/features/LanguageFilter.feature", glue="steps")
 class filterByLanguageTest extends AbstractTestNGCucumberTests{
 }
+*/
 
 
-
+@CucumberOptions(features="src/test/java/features/IniciarSesion.feature", glue="steps")
+class initSesionTest extends AbstractTestNGCucumberTests{
+}

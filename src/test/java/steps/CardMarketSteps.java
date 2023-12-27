@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,11 +17,14 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.time.Duration;
+import java.util.List;
 
 
 public class CardMarketSteps {
 
 	static WebDriver driver;
+	static WebDriverWait wait;
 	
 	//Funcion comprueba pagina de inicio, todas las features la usan
 	
@@ -28,18 +32,23 @@ public class CardMarketSteps {
 	public static void before_or_after_all()
 	{
 		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
+
 		driver = new ChromeDriver();
+
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 	}
 	
 	@AfterAll
 	public static void after_all() {
-		driver.quit();
 	}
 	
 	@Given("the user is in the page onePiece")
 	public void UserInIndexPageOnePiece() 
 	{
 		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
+		WebElement element = driver.findElement(By.partialLinkText("One Piece"));
+		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	@Given("the user is in the index page")
 	public void UserInIndexPage() 
@@ -60,6 +69,7 @@ public class CardMarketSteps {
 	@When("^the user clicks (.*) chosen game") 
 	public void UserClicksGameChosen(String game){
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title, '" + game + "')]"));
+		wait.until(ExpectedConditions.visibilityOf(element));
 		element.click();
 	}
 	
@@ -81,6 +91,8 @@ public class CardMarketSteps {
 	@When("^the user clicks (.*) chosen product") 
 	public void UserClicksProductTypeChosen(String type) {
 		WebElement element = driver.findElement(By.partialLinkText(type));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -95,8 +107,9 @@ public class CardMarketSteps {
 	//----------------------------------------------------------------------------------------------------------------
 	//funciones feature iniciar sesion
 	
+	// Scenario Iniciar Sesion
 	@When("^the user writes (.*) username") 
-	public void UserWritesUsername(String username) {
+	public void UserWritesUsername(String username) {		
 		driver.findElement(By.name("username")).sendKeys(username);
 	}
 	
@@ -107,7 +120,9 @@ public class CardMarketSteps {
 
 	@When("the user clicks IniciarSesion button")
 	public void userClicksIniciarSesionButton() {
-		driver.findElement(By.className("btn-outline-primary")).click();
+		WebElement element = driver.findElement(By.className("btn-outline-primary"));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		element.click();
 		//prguntar al profe. buscar btn-outline-primary esta feo, hay mas de uno, solo que el primero que pilla es el que queremos
 	}
 	
@@ -118,12 +133,28 @@ public class CardMarketSteps {
 		
 	}
 	
+	// Scenario Fallo Iniciar Sesion
+	@When("the user is log out") 
+	public void UserLogOut() {
+		driver.findElement(By.id("navbar-toggler-icon-custom")).click();
+		WebElement element = driver.findElement(By.id("logout-link"));
+		element.click();
+	}
+	
+	@Then("the alert box appears")
+	public void AlertBoxAppears() {
+		WebElement element = driver.findElement(By.className("alert-heading"));
+		wait.until(ExpectedConditions.visibilityOf(element));		
+		Assert.assertTrue(element.getText().contains("try to login again"));
+		
+	}
+	
 	
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//funciones feature buscar cartas
 	
-	
+	// Scenario busca carta buena
 	@When("^the user writes (.*) of the card") 
 	public void UserWritesNameOfCard(String name) {
 		driver.findElement(By.id("ProductSearchInput")).sendKeys(name);
@@ -141,6 +172,7 @@ public class CardMarketSteps {
 	public void UserClicksCardWants(String card) {
 		
 		WebElement element = driver.findElement(By.partialLinkText(card));
+		wait.until(ExpectedConditions.visibilityOf(element));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -152,6 +184,19 @@ public class CardMarketSteps {
 		String titulo = driver.findElement(By.className("page-title-container")).getText();
 		Assert.assertTrue(titulo.contains(card));
 	}
+	
+	
+	// Scenario buscar carta mala
+	@Then("the card not found message apperas")
+	public void CardNotFoundMessageAppears() {
+		WebElement element = driver.findElement(By.className("noResults"));
+		
+		
+		Assert.assertTrue(element.isDisplayed());
+		String titulo = element.getText();
+		Assert.assertTrue(titulo.contains("No hay resultados para su consulta"));
+	}
+	
 	
 	
 	//----------------------------------------------------------------------------------------------------------------

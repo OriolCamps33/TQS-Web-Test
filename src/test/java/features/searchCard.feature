@@ -15,3 +15,13 @@ Examples:
 |  zoro  |  Roronoa Zoro (OP01-025) (V.2)  |
 
 
+Scenario Outline: User search none card
+
+Given the user is in the page onePiece
+When the user writes <name> of the card
+And the user clicks search button
+Then the card not found message apperas
+
+Examples:
+| name |
+| asdf |
