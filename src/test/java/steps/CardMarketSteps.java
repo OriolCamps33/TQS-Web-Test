@@ -26,7 +26,7 @@ public class CardMarketSteps {
 	static WebDriver driver;
 	static WebDriverWait wait;
 	
-	//Funcion comprueba pagina de inicio, todas las features la usan
+	
 	
 	@BeforeAll
 	public static void before_or_after_all()
@@ -43,6 +43,9 @@ public class CardMarketSteps {
 	public static void after_all() {
 	}
 	
+	//------------------------------------------------------------------------------------------------------------
+	//Funcion comprueba pagina de inicio, todas las features la usan
+	
 	@Given("the user is in the page onePiece")
 	public void UserInIndexPageOnePiece() 
 	{
@@ -50,6 +53,7 @@ public class CardMarketSteps {
 		WebElement element = driver.findElement(By.partialLinkText("One Piece"));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
+	
 	@Given("the user is in the index page")
 	public void UserInIndexPage() 
 	{
@@ -138,6 +142,7 @@ public class CardMarketSteps {
 	public void UserLogOut() {
 		driver.findElement(By.id("navbar-toggler-icon-custom")).click();
 		WebElement element = driver.findElement(By.id("logout-link"));
+		wait.until(ExpectedConditions.visibilityOf(element));	
 		element.click();
 	}
 	
@@ -145,11 +150,18 @@ public class CardMarketSteps {
 	public void AlertBoxAppears() {
 		WebElement element = driver.findElement(By.className("alert-heading"));
 		wait.until(ExpectedConditions.visibilityOf(element));		
-		Assert.assertTrue(element.getText().contains("try to login again"));
+		Assert.assertTrue(element.getText().contains("La contraseña es incorrecta"));
 		
 	}
 	
-	
+	//scenario wrong password
+	@Then("the wrong password message appears")
+	public void WrongPasswordMessageAppears() {
+		WebElement element = driver.findElement(By.className("alert-heading"));
+		wait.until(ExpectedConditions.visibilityOf(element));		
+		Assert.assertTrue(element.getText().contains("La contraseña es incorrecta"));
+		
+	}
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//funciones feature buscar cartas
@@ -250,33 +262,131 @@ public class CardMarketSteps {
 		driver.close();
 	}
 	
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//funciones feature tendencias
+	
+	@When("the user clicks the tendencias button") 
+	public void UserClicksTendenciasButton() {
+		WebElement element = driver.findElement(By.partialLinkText("VER TENDENCIAS"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@When("^the user clicks (.*) tendencia he wants to see") 
+	public void UserClicksBestSellerButton(String tendencia) {
+		WebElement element = driver.findElement(By.partialLinkText(tendencia));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@Then("^the (.*) tendencia appears")
+	public void theBestSellersAppears(String tendenciaTitle) {
+		String titulo = driver.findElement(By.partialLinkText(tendenciaTitle)).getText();
+		Assert.assertTrue(titulo.contains(tendenciaTitle));
+	}
+	
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//funciones feature cardList
+	
+	//scenario crear listas
+	@When("the user inits sesion") 
+	public void UserInitsSesion() {
+		driver.findElement(By.name("username")).sendKeys("PGutCa");
+		driver.findElement(By.name("userPassword")).sendKeys("MarcOriol3");
+		WebElement element = driver.findElement(By.className("btn-outline-primary"));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		element.click();
+	}
+	
+	@When("the user goes to MyWants") 
+	public void UserGoesMyWants() {
+		WebElement element = driver.findElement(By.id("buying-dropdown"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		element = driver.findElement(By.xpath("//a[contains(@title, 'Mis wants')]"));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@When("^the user writtes the (.*) of the list") 
+	public void UserWrittesList(String name) {
+		driver.findElement(By.id("swWantsListName")).sendKeys(name);
+	}
+	
+	@When("the user adds the list") 
+	public void UserAddsTheList() {
+		WebElement element = driver.findElement(By.className("newList-btn"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	@Then("the empty list appears")
+	public void theEmptyListAppears() {
+		String titulo = driver.findElement(By.className("noResults")).getText();
+		Assert.assertTrue(titulo.contains("Todavía no has añadido cartas a tu lista de wants."));
+	}
+	
+	
+	//scenario eliminar listas
+	@When("the user returnsToWants") 
+	public void UserReturnToWants() {
+		WebElement element = driver.findElement(By.partialLinkText("Wants"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@Then("the error message appears")
+	public void theErrorMessageAppears() {
+		String titulo = driver.findElement(By.className("alert-heading")).getText();
+		Assert.assertTrue(titulo.contains("Ya tienes una lista de wants con ese nombre"));
+	}
+	
+	//scenario rename + delete
+	@When("the user enters the list wants") 
+	public void UserEntersListWants() {
+		WebElement element = driver.findElement(By.partialLinkText("VIEW / EDIT LIST"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	@When("the user opens the list options") 
+	public void UserOpensListOptions() {
+		WebElement element = driver.findElement(By.partialLinkText("WANTS OPTIONS"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@When("^the user renames (.*) the list") 
+	public void UserRenamesList(String newName) {
+		//driver.findElement(By.className("form-control")).sendKeys(newName);
+		
+		WebElement element = driver.findElement(By.xpath("//a[contains(@name, 'newName')]"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element = driver.findElement(By.partialLinkText("RENAME"));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@When("the user deletes the list") 
+	public void UserDeletesList() {
+		WebElement element = driver.findElement(By.className("d-grid"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	@Then("^the list has new name (.*)")
+	public void theListHasNewName(String newName) {
+		String titulo = driver.findElement(By.className("flex-grow-1")).getText();
+		Assert.assertTrue(titulo.contains(newName));
+	}
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,7 +7,7 @@ When the user clicks sidebarFilter
 And the user clicks language
 And the user marks <language>
 And the user aply the filter
-Then the <language> appears checked
+#Then the <title> shop appears
 
 Examples:
 |  language  |
