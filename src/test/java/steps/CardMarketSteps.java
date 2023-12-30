@@ -17,8 +17,13 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.awt.*;
+import java.awt.event.InputEvent;
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
 
 
 public class CardMarketSteps {
@@ -30,17 +35,26 @@ public class CardMarketSteps {
 	
 	@BeforeAll
 	public static void before_or_after_all()
-	{
+	{	
 		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
 
 		driver = new ChromeDriver();
+		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
+		
+		driver.findElement(By.name("username")).sendKeys("PGutCa");
+		driver.findElement(By.name("userPassword")).sendKeys("MarcOriol3");
+		WebElement element = driver.findElement(By.className("btn-outline-primary"));
+		element.click();
 
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		driver.findElement(By.cssSelector("[aria-label='Aceptar todas las cookies']")).click();
+		
+		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
 	}
 	
 	@AfterAll
 	public static void after_all() {
+		//driver.quit();
 	}
 	
 	//------------------------------------------------------------------------------------------------------------
@@ -217,15 +231,12 @@ public class CardMarketSteps {
 	@Given("the user is in a card page")
 	public void UserInCardPage() 
 	{
-		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
-		driver = new ChromeDriver();
 		driver.navigate().to("https://www.cardmarket.com/es/Magic/Products/Singles/Commander-The-Lost-Caverns-of-Ixalan/Sol-Ring");
 		
 	}
 	
 	@When("the user clicks sidebarFilter") 
 	public void UserClicksSidebarFilter() {
-		//driver.findElement(By.className("fonticon-filter")).click();
 		WebElement element = driver.findElement(By.className("fonticon-filter"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -233,7 +244,6 @@ public class CardMarketSteps {
 
 	@When("the user clicks language") 
 	public void UserClicksLanguage() {
-		//driver.findElement(By.className("fonticon-language")).click();
 		WebElement element = driver.findElement(By.className("fonticon-language"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -241,7 +251,6 @@ public class CardMarketSteps {
 
 	@When("^the user marks (.*)") 
 	public void UserMarksLanguage(String language) {
-		//driver.findElement(By.name(language)).click();
 		WebElement element = driver.findElement(By.name(language));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -249,7 +258,6 @@ public class CardMarketSteps {
 	
 	@When("the user aply the filter") 
 	public void UserAplyFilter() {
-		//driver.findElement(By.name("apply")).click();
 		WebElement element = driver.findElement(By.name("apply"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -288,17 +296,9 @@ public class CardMarketSteps {
 	
 	
 	//----------------------------------------------------------------------------------------------------------------
-	//funciones feature cardList
+	// funciones feature cardList
 	
-	//scenario crear listas
-	@When("the user inits sesion") 
-	public void UserInitsSesion() {
-		driver.findElement(By.name("username")).sendKeys("PGutCa");
-		driver.findElement(By.name("userPassword")).sendKeys("MarcOriol3");
-		WebElement element = driver.findElement(By.className("btn-outline-primary"));
-		wait.until(ExpectedConditions.visibilityOf(element));
-		element.click();
-	}
+	// scenario crear listas
 	
 	@When("the user goes to MyWants") 
 	public void UserGoesMyWants() {
@@ -322,21 +322,14 @@ public class CardMarketSteps {
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-
-	@Then("the empty list appears")
-	public void theEmptyListAppears() {
-		String titulo = driver.findElement(By.className("noResults")).getText();
-		Assert.assertTrue(titulo.contains("Todavía no has añadido cartas a tu lista de wants."));
+	
+	@Then("^the (.*) list appears")
+	public void theNameListAppears(String name) {
+		String titulo = driver.findElement(By.className("flex-grow-1")).getText();
+		Assert.assertTrue(titulo.contains(name));
 	}
 	
-	
-	//scenario eliminar listas
-	@When("the user returnsToWants") 
-	public void UserReturnToWants() {
-		WebElement element = driver.findElement(By.partialLinkText("Wants"));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
+	// scenario Repeat list	
 	
 	@Then("the error message appears")
 	public void theErrorMessageAppears() {
@@ -344,13 +337,7 @@ public class CardMarketSteps {
 		Assert.assertTrue(titulo.contains("Ya tienes una lista de wants con ese nombre"));
 	}
 	
-	//scenario rename + delete
-	@When("the user enters the list wants") 
-	public void UserEntersListWants() {
-		WebElement element = driver.findElement(By.partialLinkText("VIEW / EDIT LIST"));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
+	// Scenario remove list
 
 	@When("the user opens the list options") 
 	public void UserOpensListOptions() {
@@ -359,31 +346,49 @@ public class CardMarketSteps {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	@When("^the user renames (.*) the list") 
-	public void UserRenamesList(String newName) {
-		//driver.findElement(By.className("form-control")).sendKeys(newName);
-		
-		WebElement element = driver.findElement(By.xpath("//a[contains(@name, 'newName')]"));
+	@When("the user enters the list wants") 
+	public void UserEntersListWants() {
+		WebElement element = driver.findElement(By.partialLinkText("VIEW / EDIT LIST"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
-		
-		
-		element = driver.findElement(By.partialLinkText("RENAME"));
-		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
 	@When("the user deletes the list") 
-	public void UserDeletesList() {
-		WebElement element = driver.findElement(By.className("d-grid"));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
+	public void UserDeletesList() throws AWTException, InterruptedException {
+		
+		Robot robot = new Robot();
+		robot.mouseMove(800, 459); // Navigating through mouse hover. Note that the coordinates might differ, kindly check the coordinates of x and y axis and update it accordingly.
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		Thread.sleep(100);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		Thread.sleep(100);
 	}
 	
-	@Then("^the list has new name (.*)")
-	public void theListHasNewName(String newName) {
-		String titulo = driver.findElement(By.className("flex-grow-1")).getText();
-		Assert.assertTrue(titulo.contains(newName));
+	@Then("the empty message appears")
+	public void theEmptyListAppears() {
+		String titulo = driver.findElement(By.className("noResults")).getText();
+		Assert.assertTrue(titulo.contains("You haven't added any wants list yet."));
+	}
+	
+		
+	// -------------------------------------------------------------
+	// Feature carrito
+	
+	// Scenario addCardToCart
+	
+	@When("the user add the product to cart")
+	public void addToCart() throws InterruptedException {
+		WebElement element = driver.findElement(By.cssSelector("[aria-label='Añadir a mi Carrito ']"));	
+		element.click();
+        wait.wait(5);
+	}
+	
+	@Then("^the (.*) appears in the cart")
+	public void checkTheCart(String card) {
+		driver.findElement(By.id("cart")).click();
+		String element = driver.findElement(By.partialLinkText(card)).getText();
+		Assert.assertTrue(element.contains(card));
+		
 	}
 	
 	
