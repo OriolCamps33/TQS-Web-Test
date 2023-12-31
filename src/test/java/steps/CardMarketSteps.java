@@ -31,8 +31,6 @@ public class CardMarketSteps {
 	static WebDriver driver;
 	static WebDriverWait wait;
 	
-	
-	
 	@BeforeAll
 	public static void before_or_after_all()
 	{	
@@ -57,8 +55,9 @@ public class CardMarketSteps {
 		//driver.quit();
 	}
 	
-	//------------------------------------------------------------------------------------------------------------
-	//Funcion comprueba pagina de inicio, todas las features la usan
+	// ------------------------------
+	// Funcion Index Page
+	// ------------------------------
 	
 	@Given("the user is in the page onePiece")
 	public void UserInIndexPageOnePiece() 
@@ -75,8 +74,9 @@ public class CardMarketSteps {
 		
 	}
 	
-	//------------------------------------------------------------------------------------------------------------
-	//funciones feature change game
+	// ------------------------------
+	// feature change game
+	// ------------------------------
 	
 	@When("the user clicks the game selector")
 	public void UserClicksGameSelector() 
@@ -97,8 +97,9 @@ public class CardMarketSteps {
 		Assert.assertTrue(titulo.contains(title));
 	}
 	
-	//------------------------------------------------------------------------------------------------------------
-	//funciones feature change product
+	// ------------------------------
+	// feature change product
+	// ------------------------------
 	
 	@When("the user clicks Productos") 
 	public void UserClicksProductos() {
@@ -122,8 +123,9 @@ public class CardMarketSteps {
 	}
 	
 	
-	//----------------------------------------------------------------------------------------------------------------
-	//funciones feature iniciar sesion
+	// ------------------------------
+	// feature iniciar sesion
+	// ------------------------------
 	
 	// Scenario Iniciar Sesion
 	@When("^the user writes (.*) username") 
@@ -177,30 +179,40 @@ public class CardMarketSteps {
 		
 	}
 	
-	//----------------------------------------------------------------------------------------------------------------
-	//funciones feature buscar cartas
+	// -------------------------------
+	// feature buscar cartas
+	// ------------------------------
 	
 	// Scenario busca carta buena
 	@When("^the user writes (.*) of the card") 
-	public void UserWritesNameOfCard(String name) {
+	public void UserWritesNameOfCard(String name) throws InterruptedException {
 		driver.findElement(By.id("ProductSearchInput")).sendKeys(name);
+		synchronized (wait) {
+			wait.wait(200);
+		}
 	}
 	
 	
 	@When("the user clicks search button") 
-	public void UserClicksSearchButton() {
+	public void UserClicksSearchButton() throws InterruptedException {
 		driver.findElement(By.id("search-btn")).click();
+		synchronized (wait) {
+			wait.wait(200);
+		}
 	}
 	
 
 	
 	@When("^the user clicks (.*) he wants") 
-	public void UserClicksCardWants(String card) {
+	public void UserClicksCardWants(String card) throws InterruptedException {
 		
 		WebElement element = driver.findElement(By.partialLinkText(card));
-		wait.until(ExpectedConditions.visibilityOf(element));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
+		synchronized (wait) {
+			wait.wait(200);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", element);
+		}
 	}
 
 
@@ -215,9 +227,7 @@ public class CardMarketSteps {
 	// Scenario buscar carta mala
 	@Then("the card not found message apperas")
 	public void CardNotFoundMessageAppears() {
-		WebElement element = driver.findElement(By.className("noResults"));
-		
-		
+		WebElement element = driver.findElement(By.className("noResults"));		
 		Assert.assertTrue(element.isDisplayed());
 		String titulo = element.getText();
 		Assert.assertTrue(titulo.contains("No hay resultados para su consulta"));
@@ -225,8 +235,9 @@ public class CardMarketSteps {
 	
 	
 	
-	//----------------------------------------------------------------------------------------------------------------
-	//funciones feature filtrar idioma
+	// ------------------------------
+	// feature filtrar idioma
+	// ------------------------------
 	
 	@Given("the user is in a card page")
 	public void UserInCardPage() 
@@ -267,12 +278,12 @@ public class CardMarketSteps {
 	public void CardLanguageChecked(String language) {
 		WebElement element = driver.findElement(By.name(language));
 		Assert.assertEquals(element.getAttribute("checked"), "true");
-		driver.close();
 	}
 	
 	
-	//----------------------------------------------------------------------------------------------------------------
-	//funciones feature tendencias
+	// ------------------------------
+	// feature tendencias
+	// ------------------------------
 	
 	@When("the user clicks the tendencias button") 
 	public void UserClicksTendenciasButton() {
@@ -295,8 +306,9 @@ public class CardMarketSteps {
 	}
 	
 	
-	//----------------------------------------------------------------------------------------------------------------
-	// funciones feature cardList
+	// ------------------------------
+	// feature cardList
+	// ------------------------------
 	
 	// scenario crear listas
 	
@@ -371,8 +383,9 @@ public class CardMarketSteps {
 	}
 	
 		
-	// -------------------------------------------------------------
+	// ------------------------------
 	// Feature carrito
+	// ------------------------------
 	
 	// Scenario addCardToCart
 	
@@ -380,18 +393,84 @@ public class CardMarketSteps {
 	public void addToCart() throws InterruptedException {
 		WebElement element = driver.findElement(By.cssSelector("[aria-label='Añadir a mi Carrito ']"));	
 		element.click();
-        wait.wait(5);
 	}
 	
 	@Then("^the (.*) appears in the cart")
-	public void checkTheCart(String card) {
-		driver.findElement(By.id("cart")).click();
-		String element = driver.findElement(By.partialLinkText(card)).getText();
-		Assert.assertTrue(element.contains(card));
+	public void checkTheCart(String card) throws InterruptedException {
+		synchronized (wait) {
+			wait.wait(2000);
+	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cart")));
+	        element.click();
+	    }
 		
+		String titulo = driver.findElement(By.partialLinkText(card)).getText();
+		Assert.assertTrue(titulo.contains(card));
 	}
 	
+	// Scenario removeCardToCart
 	
+	@When("the user enters in the cart")
+	public void enterTheCart() {
+		synchronized (wait) {
+	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cart")));
+	        element.click();
+	    }
+	}
 	
+	@When("^the user clean the cart")
+	public void removeTheCard() {
+		synchronized (wait) {
+	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[title='Vacíar carrito']")));
+	        JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", element);
+	    }
+	}
 	
+	@Then("the cart is empty")
+	public void theCartEmpty() {
+		String titulo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("h3"))).getText();
+		Assert.assertTrue(titulo.contains("Tu carrito está vacío"));
+	}
+	
+	// ------------------------------
+	// Feature Profile
+	// ------------------------------
+		
+	// Scenario ChangeName
+	//When the user enters in the users page
+	@When("the user enters in the users page")
+	public void enterTheUser() throws InterruptedException {
+		driver.findElement(By.id("account-dropdown")).click();
+		synchronized (wait) {
+			wait.wait(200);
+		}
+		driver.findElement(By.cssSelector("[title='Cuenta']")).click();
+		
+	}
+  	// And the user go to his profile
+	@When("the user go to his profile")
+	public void enterTheProfile() throws InterruptedException {
+		driver.findElement(By.partialLinkText("Perfil")).click();
+		synchronized (wait) {
+			wait.wait(200);
+		}
+		
+	}
+  	// And the user edit the name
+	@When("^the user edit the (.*)")
+	public void editTheName(String name) throws InterruptedException {
+		driver.findElement(By.partialLinkText("NOMBRE")).click(); // Esta mireda no funciona i ns pk
+		synchronized (wait) {
+			wait.wait(200);
+			driver.findElement(By.cssSelector("[name=\"firstName\"]")).sendKeys(name);
+			wait.wait(200);
+			driver.findElement(By.className("btn-success")).click();
+		}
+	}
+	//Then the name changes
+	@Then("^the (.*) changes")
+	public void nameChange(String name) {
+		String nombre = driver.findElement(By.partialLinkText("Gutierrez Perez")).getText();
+		Assert.assertTrue(nombre.contains(name));
+	}
 }
