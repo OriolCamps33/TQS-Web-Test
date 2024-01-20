@@ -9,7 +9,7 @@ Feature: CardLists
 		
 		Examples:
 		| name  |
-		|lista1|
+		|lista1 |
 	
 	
 	Scenario Outline: TryCreateRepeatedList
@@ -21,7 +21,7 @@ Feature: CardLists
 		
 		Examples:
 		| name  |
-		|lista1|
+		|lista1 |
 	
 	Scenario Outline: DeleteCardList
 		Given the user is in the index page

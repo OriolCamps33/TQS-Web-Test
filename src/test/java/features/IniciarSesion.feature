@@ -11,9 +11,7 @@ Feature: Sesiones
 		
 		Examples:
 		|  username  |  password  |
-		|   PGutCa   |  MarcOriol3  |	
-	
-	Scenario Outline: Cerrar Sesion
+		|   PGutCa   |  MarcOriol3  |		
 	
 	
 	Scenario Outline: Fallo Iniciar Sesion
@@ -29,6 +27,7 @@ Feature: Sesiones
 		|  username  |  password  |
 		|    asdf    |    asdf    |
 	
+	
 	Scenario Outline: Fallo contrasenya Iniciar Sesion
 	
 		Given the user is in the index page
@@ -40,6 +39,7 @@ Feature: Sesiones
 		Examples:
 		|   username   |    password     |
 		|    PGutCa    |    MarcOriol    |
+	
 	
 	Scenario Outline: Fallo usuario Iniciar Sesion
 	

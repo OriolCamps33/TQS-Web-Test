@@ -22,7 +22,7 @@ Feature: Buscador
 		Then the <edit> appears in the list
 		
 		Examples:
-		|  		 edit       |
-		|			Sobres      |
-		| Cajas de Sobres |
-		|      Lots       |
+		|  		 		 edit 		       |
+		|			 Paramount War			 |
+		| Awakening of the New Era |
+		|   Kingdoms of Intrigue   |

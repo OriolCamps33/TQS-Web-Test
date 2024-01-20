@@ -47,14 +47,19 @@ class changeProductsTest extends AbstractTestNGCucumberTests{
 @CucumberOptions(features="src/test/java/features/carrito.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
-*/
 
 //profile
 @CucumberOptions(features="src/test/java/features/profile.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
+*/
 
 
+
+//buscadordor
+@CucumberOptions(features="src/test/java/features/Buscador.feature", glue="steps")
+class changeProductsTest extends AbstractTestNGCucumberTests{
+}
 
 
 

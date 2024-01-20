@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -62,10 +63,7 @@ public class CardMarketSteps {
 	@Given("the user is in the page onePiece")
 	public void UserInIndexPageOnePiece()
 	{
-		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
-		WebElement element = driver.findElement(By.partialLinkText("One Piece"));
-		wait.until(ExpectedConditions.visibilityOf(element));
-		
+		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");		
 	}
 	
 	@Given("the user is in the index page")
@@ -74,6 +72,10 @@ public class CardMarketSteps {
 		driver.navigate().to("https://www.cardmarket.com/es/Magic");	
 	}
 	
+	@Given("the user is in the search page")
+	public void searchPage() {
+		driver.navigate().to("https://www.cardmarket.com/es/OnePiece/Products/Search");
+	}
 	// ------------------------------
 	// feature change game
 	// ------------------------------
@@ -478,7 +480,6 @@ public class CardMarketSteps {
 			wait.wait(500);
 		}
 		String nombre = driver.findElement(By.id("AlertContainer")).getText();
-		System.out.println(nombre);
 		Assert.assertTrue(nombre.contains("Su petición se ha ejecutado correctamente"));
 	}
 	
@@ -492,4 +493,58 @@ public class CardMarketSteps {
 		String nombre = driver.findElement(By.className("alert-heading")).getText();
 		Assert.assertTrue(nombre.contains("exception_sameName"));
 	}
+	
+	
+	
+	// ------------------------------
+	// Feature Buscador
+	// ------------------------------
+	
+	// Scenario Change product type
+	@When("^the user change the category to (.*)")
+	public void changeCategoryTo(String type) throws InterruptedException {
+		Select select = new Select(driver.findElement(By.name("idCategory")));
+		select.selectByVisibleText(type);
+		synchronized (wait) {
+			wait.wait(500);
+		}
+	}
+	
+	@When("the user search for products")
+	public void searchProduct() throws InterruptedException {
+		WebElement element = driver.findElement(By.className("col-auto"));
+		synchronized (wait) {
+			wait.wait(500);
+		}
+		
+		element.click();
+		
+	}
+	
+	@Then("^the title changes to (.*)")
+	public void changeTitle(String type) throws InterruptedException {
+		synchronized (wait) {
+			wait.wait(500);
+		}
+		String title = driver.findElement(By.className("H1_PageTitle")).getText();
+		System.out.println(title);
+		Assert.assertTrue(title.contains(type));
+	}
+	
+	// Scenario Change edition type
+	@When("^the user change the edition to (.*)")
+	public void changeEditionTo(String edit) throws InterruptedException {
+		Select select = new Select(driver.findElement(By.name("idCategory")));
+		select.selectByVisibleText(edit);
+		synchronized (wait) {
+			wait.wait(500);
+		}
+	}
+	
+	@Then("^the (.*) appears in the list")
+	public void changeEditionList(String edit) {
+		String name = driver.findElement(By.id("productRow696230")).getText();
+		Assert.assertTrue(name.contains(edit));
+	}
+	
 }
