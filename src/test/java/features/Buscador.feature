@@ -19,10 +19,10 @@ Feature: Buscador
 		Given the user is in the search page
 		When the user change the edition to <edit>
 		And the user search for products
-		Then the <edit> appears in the list
+		Then the <edit> appears in the list <id>
 		
 		Examples:
-		|  		 		 edit 		       |
-		|			 Paramount War			 |
-		| Awakening of the New Era |
-		|   Kingdoms of Intrigue   |
+		|  		 		 edit 		       |  		 	id				|
+		|			 Paramount War			 | productRow696230 |
+		| Awakening of the New Era | productRow725748 |
+		|   Kingdoms of Intrigue   | productRow733131 |

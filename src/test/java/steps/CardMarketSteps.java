@@ -534,16 +534,25 @@ public class CardMarketSteps {
 	// Scenario Change edition type
 	@When("^the user change the edition to (.*)")
 	public void changeEditionTo(String edit) throws InterruptedException {
-		Select select = new Select(driver.findElement(By.name("idCategory")));
-		select.selectByVisibleText(edit);
+		
+		Select select1 = new Select(driver.findElement(By.name("idCategory")));
+		select1.selectByVisibleText("Sobres");
+		
+		synchronized (wait) {
+			wait.wait(500);
+		}
+		
+		Select select2 = new Select(driver.findElement(By.name("idExpansion")));
+		select2.selectByVisibleText(edit);
+		
 		synchronized (wait) {
 			wait.wait(500);
 		}
 	}
 	
-	@Then("^the (.*) appears in the list")
-	public void changeEditionList(String edit) {
-		String name = driver.findElement(By.id("productRow696230")).getText();
+	@Then("^the (.*) appears in the list (.*)")
+	public void changeEditionList(String edit, String id) {
+		String name = driver.findElement(By.id(id)).getText();
 		Assert.assertTrue(name.contains(edit));
 	}
 	
