@@ -5,12 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
@@ -21,9 +18,6 @@ import io.cucumber.java.en.When;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.time.Duration;
-import java.util.List;
-import java.util.Set;
-import java.util.Iterator;
 
 
 public class CardMarketSteps {
@@ -32,22 +26,28 @@ public class CardMarketSteps {
 	static WebDriverWait wait;
 	
 	@BeforeAll
-	public static void before_or_after_all()
+	public static void before_or_after_all() throws InterruptedException
 	{	
 		System.setProperty("webdriver.chrome.driver","Drivers/chromedriver-win64/chromedriver.exe");
 
 		driver = new ChromeDriver();
 		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
 		
-		driver.findElement(By.name("username")).sendKeys("PGutCa");
-		driver.findElement(By.name("userPassword")).sendKeys("MarcOriol3");
-		WebElement element = driver.findElement(By.className("btn-outline-primary"));
-		element.click();
-
-		driver.findElement(By.cssSelector("[aria-label='Aceptar todas las cookies']")).click();
-		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
+		synchronized (wait) {
+			wait.wait(500);
+		
+			driver.findElement(By.name("username")).sendKeys("PGutCa");
+			wait.wait(500);
+			driver.findElement(By.name("userPassword")).sendKeys("MarcOriol3");
+			wait.wait(500);
+			WebElement element = driver.findElement(By.className("btn-outline-primary"));
+			element.click();
+			wait.wait(500);
+	
+			driver.findElement(By.cssSelector("[aria-label='Aceptar todas las cookies']")).click();
+			wait.wait(500);
+		}
 	}
 	
 	@AfterAll
@@ -60,18 +60,18 @@ public class CardMarketSteps {
 	// ------------------------------
 	
 	@Given("the user is in the page onePiece")
-	public void UserInIndexPageOnePiece() 
+	public void UserInIndexPageOnePiece()
 	{
 		driver.navigate().to("https://www.cardmarket.com/es/OnePiece");
 		WebElement element = driver.findElement(By.partialLinkText("One Piece"));
 		wait.until(ExpectedConditions.visibilityOf(element));
+		
 	}
 	
 	@Given("the user is in the index page")
-	public void UserInIndexPage() 
+	public void UserInIndexPage() throws InterruptedException 
 	{
-		driver.navigate().to("https://www.cardmarket.com/es/Magic");
-		
+		driver.navigate().to("https://www.cardmarket.com/es/Magic");	
 	}
 	
 	// ------------------------------
@@ -438,7 +438,7 @@ public class CardMarketSteps {
 		
 	// Scenario ChangeName
 	//When the user enters in the users page
-	@When("the user enters in the users page")
+	@Given("the user enters in the users page")
 	public void enterTheUser() throws InterruptedException {
 		driver.findElement(By.id("account-dropdown")).click();
 		synchronized (wait) {
@@ -459,18 +459,37 @@ public class CardMarketSteps {
   	// And the user edit the name
 	@When("^the user edit the (.*)")
 	public void editTheName(String name) throws InterruptedException {
-		driver.findElement(By.partialLinkText("NOMBRE")).click(); // Esta mireda no funciona i ns pk
+		WebElement element = driver.findElement(By.className("col-md-4"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
 		synchronized (wait) {
 			wait.wait(200);
-			driver.findElement(By.cssSelector("[name=\"firstName\"]")).sendKeys(name);
+			WebElement ele2 = driver.findElement(By.cssSelector("[name=\"firstName\"]"));
+			ele2.clear();
+			ele2.sendKeys(name);
 			wait.wait(200);
 			driver.findElement(By.className("btn-success")).click();
 		}
 	}
 	//Then the name changes
-	@Then("^the (.*) changes")
-	public void nameChange(String name) {
-		String nombre = driver.findElement(By.partialLinkText("Gutierrez Perez")).getText();
-		Assert.assertTrue(nombre.contains(name));
+	@Then("the name changes")
+	public void nameChange() throws InterruptedException {
+		synchronized (wait) {
+			wait.wait(500);
+		}
+		String nombre = driver.findElement(By.id("AlertContainer")).getText();
+		System.out.println(nombre);
+		Assert.assertTrue(nombre.contains("Su petición se ha ejecutado correctamente"));
+	}
+	
+	
+	//Scenario SameName
+	@Then("the same name message appears")
+	public void sameName() throws InterruptedException {
+		synchronized (wait) {
+			wait.wait(500);
+		}
+		String nombre = driver.findElement(By.className("alert-heading")).getText();
+		Assert.assertTrue(nombre.contains("exception_sameName"));
 	}
 }
