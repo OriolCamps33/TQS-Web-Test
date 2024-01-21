@@ -53,7 +53,7 @@ public class CardMarketSteps {
 	
 	@AfterAll
 	public static void after_all() {
-		//driver.quit();
+		driver.quit();
 	}
 	
 	// ------------------------------
@@ -76,6 +76,7 @@ public class CardMarketSteps {
 	public void searchPage() {
 		driver.navigate().to("https://www.cardmarket.com/es/OnePiece/Products/Search");
 	}
+	
 	// ------------------------------
 	// feature change game
 	// ------------------------------
@@ -83,19 +84,26 @@ public class CardMarketSteps {
 	@When("the user clicks the game selector")
 	public void UserClicksGameSelector() 
 	{
-		driver.findElement(By.className("nav-link")).click();
+		driver.manage().window().maximize();
+		driver.findElement(By.className("games-dropdown")).click();
 	}
 	
 	@When("^the user clicks (.*) chosen game") 
-	public void UserClicksGameChosen(String game){
+	public void UserClicksGameChosen(String game) throws InterruptedException{
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title, '" + game + "')]"));
-		wait.until(ExpectedConditions.visibilityOf(element));
+		synchronized (wait) {
+			wait.wait(1000);
+		}
 		element.click();
 	}
 	
 	@Then("^the (.*) shop appears")
-	public void NewIndexAppears(String title) {
-		String titulo = driver.findElement(By.partialLinkText(title)).getText();
+	public void NewIndexAppears(String title) throws InterruptedException {
+		synchronized (wait) {
+			wait.wait(1000);
+		}
+		String titulo = driver.findElement(By.className("games-dropdown")).getText();
+		System.out.println(titulo);
 		Assert.assertTrue(titulo.contains(title));
 	}
 	
@@ -245,7 +253,6 @@ public class CardMarketSteps {
 	public void UserInCardPage() 
 	{
 		driver.navigate().to("https://www.cardmarket.com/es/Magic/Products/Singles/Commander-The-Lost-Caverns-of-Ixalan/Sol-Ring");
-		
 	}
 	
 	@When("the user clicks sidebarFilter") 
@@ -353,16 +360,16 @@ public class CardMarketSteps {
 	
 	// Scenario remove list
 
-	@When("the user opens the list options") 
-	public void UserOpensListOptions() {
-		WebElement element = driver.findElement(By.partialLinkText("WANTS OPTIONS"));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
 	@When("the user enters the list wants") 
 	public void UserEntersListWants() {
 		WebElement element = driver.findElement(By.partialLinkText("VIEW / EDIT LIST"));
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	@When("the user opens the list options") 
+	public void UserOpensListOptions() {
+		WebElement element = driver.findElement(By.partialLinkText("WANTS OPTIONS"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -400,7 +407,7 @@ public class CardMarketSteps {
 	@Then("^the (.*) appears in the cart")
 	public void checkTheCart(String card) throws InterruptedException {
 		synchronized (wait) {
-			wait.wait(2000);
+			wait.wait(1000);
 	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cart")));
 	        element.click();
 	    }
@@ -477,7 +484,7 @@ public class CardMarketSteps {
 	@Then("the name changes")
 	public void nameChange() throws InterruptedException {
 		synchronized (wait) {
-			wait.wait(500);
+			wait.wait(3000);
 		}
 		String nombre = driver.findElement(By.id("AlertContainer")).getText();
 		Assert.assertTrue(nombre.contains("Su petición se ha ejecutado correctamente"));

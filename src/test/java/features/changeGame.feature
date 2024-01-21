@@ -4,13 +4,13 @@ Feature: ChangeGame
 		
 		Given the user is in the index page
 		When the user clicks the game selector
-		And the user clicks <title> chosen game
+		And the user clicks <game> chosen game
 		Then the <title> shop appears
 		
 		Examples:
 		|  game  |  title  |
-		| Pokemon| Pokémon |
-		|OnePiece|One Piece|
-		|Digimon | Digimon |
+		| Pokémon| POKÉMON |
+		|One Piece|ONE PIECE|
+		|Digimon | DIGIMON |
 
 

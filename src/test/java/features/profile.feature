@@ -23,5 +23,3 @@ Feature: Profile
 		|  name  |
 		|  Pedro |
 		
-	Scenario Outline: ErrorName
-	

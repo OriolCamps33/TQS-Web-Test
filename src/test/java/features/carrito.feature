@@ -2,7 +2,7 @@ Feature: Carrito
 
   Scenario Outline: addCardToCart
   	Given the user is in the page onePiece
-		And the user writes <name> of the card
+		When the user writes <name> of the card
 		And the user clicks search button
 		And the user clicks <card> he wants
 		And the user add the product to cart

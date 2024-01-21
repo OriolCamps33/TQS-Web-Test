@@ -8,9 +8,9 @@ Feature: tendencias
 		Then the <tendenciaTitle> tendencia appears
 		
 		Examples:
-		|  tendencia  | tendenciaTitle|
-		| Best Sellers| Best Sellers |
-		| Mejores Cartas| Mejores cartas |
-		| Mayor Descenso De Existencias| Mayor descenso de existencias |
-		|Mayor Incremento De Precio| Mayor incremento de precio |
+		|  				 tendencia  					|					tendenciaTitle				|
+		| 				Best Sellers					| 				 Best Sellers 				|
+		|				 Mejores Cartas					| 				Mejores cartas 				|
+		|	Mayor Descenso De Existencias	| Mayor descenso de existencias	|
+		|		Mayor Incremento De Precio	| 	Mayor incremento de precio 	|
 

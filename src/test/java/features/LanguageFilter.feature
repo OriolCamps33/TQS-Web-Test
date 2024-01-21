@@ -7,7 +7,7 @@ Feature: FilterLanguage
 		And the user clicks language
 		And the user marks <language>
 		And the user aply the filter
-		#Then the <title> shop appears
+		Then the <language> appears checked
 		
 		Examples:
 		|  language  |

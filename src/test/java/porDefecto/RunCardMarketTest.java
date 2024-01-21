@@ -3,35 +3,30 @@ package porDefecto;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-/* //no funciona cambiar juego, no encuentra donde esta, no se puede por href supongo
+/* 
 @CucumberOptions(features="src/test/java/features/changeGame.feature", glue="steps")
 public class RunCardMarketTest extends AbstractTestNGCucumberTests{
 }
-*/
 
-/* //cambiar tipo producto funciona
+ //cambiar tipo producto funciona
 @CucumberOptions(features="src/test/java/features/changeProduct.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
-*/
 
-/*//funciona iniciar sesion
+//funciona iniciar sesion
 @CucumberOptions(features="src/test/java/features/IniciarSesion.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
-*/
 
-/*//buscar carta funciona
+//buscar carta funciona
 @CucumberOptions(features="src/test/java/features/searchCard.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
-
 
 //filtrar por idioma
 @CucumberOptions(features="src/test/java/features/LanguageFilter.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
-
 
 //tendencias
 @CucumberOptions(features="src/test/java/features/tendencias.feature", glue="steps")
@@ -52,12 +47,14 @@ class changeProductsTest extends AbstractTestNGCucumberTests{
 @CucumberOptions(features="src/test/java/features/profile.feature", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
+
+//Buscador
+@CucumberOptions(features="src/test/java/features/Buscador.feature", glue="steps")
+class changeProductsTest extends AbstractTestNGCucumberTests{
+}
 */
 
-
-
-//buscadordor
-@CucumberOptions(features="src/test/java/features/Buscador.feature", glue="steps")
+@CucumberOptions(features="src/test/java/features", glue="steps")
 class changeProductsTest extends AbstractTestNGCucumberTests{
 }
 
